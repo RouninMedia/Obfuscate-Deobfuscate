@@ -29,7 +29,7 @@ function obfuscate($String, $Recursion_Number) {
 }
 ```
 
-# PHP Deobfuscate
+## PHP Deobfuscate
 ```
 function deobfuscate($Obfuscated_String, $Recursion_Number) {
 
@@ -52,7 +52,7 @@ function deobfuscate($Obfuscated_String, $Recursion_Number) {
 }
 ```
 
-# Javascript Obfuscate
+## Javascript Obfuscate
 ```
 const obfuscate(string, recursionNumber) => {
 
@@ -74,7 +74,7 @@ const obfuscate(string, recursionNumber) => {
 }
 ```
 
-# Javascript Deobfuscate
+## Javascript Deobfuscate
 ```
 const deobfuscate = (obfuscatedString, recursionNumber) => {
 
