@@ -7,7 +7,7 @@ This obfuscation repeatedly applies **Base64 Encoding** (which can be encoded an
 
 The obfuscation works both server-side and client-side, which means that a string can be obfuscated on the server initially and deobfuscated in the browser, later. 
 
-# PHP Obfuscate
+## PHP Obfuscate
 ```
 function obfuscate($String, $Recursion_Number) {
 
