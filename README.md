@@ -54,6 +54,7 @@ function deobfuscate($Obfuscated_String) {
 
       $Obfuscated_Array[$i] = strrev($Obfuscated_Array[$i]);
       $Obfuscated_Array[$i] = base64_decode($Obfuscated_Array[$i]);
+      $Obfuscated_Array[$i] = str_replace('=', '', $Obfuscated_Array[$i]);
     }
   }
 
