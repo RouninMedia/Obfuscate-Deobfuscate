@@ -65,7 +65,33 @@ function deobfuscate($Obfuscated_String) {
 
 ## Javascript Obfuscate
 ```
+function obfuscate(string, recursionNumber) {
 
+  let obfuscatedArray = string.split('');
+  
+  for (let i = 0; i < recursionNumber; i++) {
+
+    for (let j = 0; j < obfuscatedArray.length; j++) {
+
+      obfuscatedArray[j] = window.btoa(obfuscatedArray[j]);
+      obfuscatedArray[j] = obfuscatedArray[j].replace('=', '');
+      obfuscatedArray[j] = obfuscatedArray[j].split('').reverse().join('');
+    }
+  }
+
+  let obfuscatedString = obfuscatedArray.join('');
+
+  let stringLength = string.length.toString().padStart(2, '0').split('');
+
+  let obfuscatedStringWithKey = '';
+  obfuscatedStringWithKey += obfuscatedString.substr(0, 6);
+  obfuscatedStringWithKey += stringLength[1];
+  obfuscatedStringWithKey += obfuscatedString.substr(6, (obfuscatedString.length - 12));
+  obfuscatedStringWithKey += stringLength[0];
+  obfuscatedStringWithKey += obfuscatedString.substr(obfuscatedString.length - 6);
+
+  return obfuscatedStringWithKey;
+}
 ```
 
 ## Javascript Deobfuscate
@@ -74,9 +100,11 @@ function deobfuscate(obfuscatedString)  {
 
   let blockLength = parseInt(obfuscatedString.substr(-7, 1) + obfuscatedString.substr(6, 1));
   obfuscatedString = obfuscatedString.substr(0, 6) + obfuscatedString.substr(7, (obfuscatedString.length - 14)) + obfuscatedString.substr(obfuscatedString.length - 6);
+  
   var regex = new RegExp('(.{' + (obfuscatedString.length / blockLength) + '})', 'g');
   let obfuscatedArray = obfuscatedString.replace(regex, '$1|').split('|');
   obfuscatedArray.pop();
+
 
   while (obfuscatedArray[0].split('').length > 1) {
 
@@ -84,10 +112,12 @@ function deobfuscate(obfuscatedString)  {
 
       obfuscatedArray[i] = obfuscatedArray[i].split('').reverse().join('');
       obfuscatedArray[i] = window.atob(obfuscatedArray[i]);
+      obfuscatedArray[i] = obfuscatedArray[i].replace('=', '');
     }
   }
 
   let string = obfuscatedArray.join('');
+  
   return string;
 }
 ```
