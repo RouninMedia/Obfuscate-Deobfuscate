@@ -76,26 +76,6 @@ const obfuscate(string, recursionNumber) => {
 
 ## Javascript Deobfuscate
 ```
-const deobfuscate = (obfuscatedString, recursionNumber) => {
-
-  var regex = new RegExp('(.{' + (obfuscatedString.length / 6) + '})', 'g');
-  let obfuscatedArray = obfuscatedString.replace(regex, '$1|').split('|');
-  obfuscatedArray.pop();
-
-  for (let i = 0; i < obfuscatedArray.length; i++) {
-
-    for (let j = 0; j < recursionNumber; j++) {
-
-      obfuscatedArray[i] = obfuscatedArray[i].split('').reverse().join('');
-      obfuscatedArray[i] = window.atob(obfuscatedArray[i]);
-    }
-  }
-
-  deobfuscatedString = obfuscatedArray.join('');
-
-  return deobfuscatedString;
-}
-
 function deobfuscate(obfuscatedString)  {
 
   let blockLength = parseInt(obfuscatedString.substr(-7, 1) + obfuscatedString.substr(6, 1));
