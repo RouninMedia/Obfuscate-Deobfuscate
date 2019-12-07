@@ -3,7 +3,7 @@ A simple obfuscation which works both server-side in PHP and client-side in Java
 
 **Obfuscation** is a technique which makes a given piece of data *more difficult* for humans to read, understand and process and, at the same time, ensures that the data is *no more difficult* for computers to read, understand and process.
 
-This obfuscation repeatedly applies **Base64 Encoding** (which can be encoded and decoded by both PHP and Javascript) and string reversal to a given string.
+This obfuscation repeatedly applies **Base64 Encoding** (which can be encoded and decoded by both PHP and Javascript) and **string reversal** to a given string.
 
 The obfuscation works both server-side and client-side, which means that a string can be obfuscated on the server initially and deobfuscated in the browser, later. 
 
