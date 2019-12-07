@@ -54,23 +54,31 @@ function deobfuscate($Obfuscated_String, $Recursion_Number) {
 
 ## Javascript Obfuscate
 ```
-const obfuscate(string, recursionNumber) => {
+function obfuscate($String, $Recursion_Number) {
 
-  let obfuscatedArray = string.split('');
+  $Obfuscated_Array = str_split($String);
   
-  for (let i = 0; i < recursionNumber; i++) {
+  for ($i = 0; $i < $Recursion_Number; $i++) {
 
-    for (let j = 0; j < count(obfuscatedArray); j++) {
+    for ($j = 0; $j < count($Obfuscated_Array); $j++) {
 
-      obfuscatedArray[j] = window.btoa(obfuscatedArray[j]);
-      obfuscatedArray[j] = obfuscatedArray[j].replace('=', '');
-      obfuscatedArray[i] = obfuscatedArray[i].split('').reverse().join('');
+      $Obfuscated_Array[$j] = base64_encode($Obfuscated_Array[$j]);
+      $Obfuscated_Array[$j] = str_replace('=', '', $Obfuscated_Array[$j]);
+      $Obfuscated_Array[$j] = strrev($Obfuscated_Array[$j]);
     }
   }
 
-  let obfuscatedString = obfuscatedArray.join('');
+  $Obfuscated_String = implode('', $Obfuscated_Array);
+  $String_Length = str_split(sprintf('%02d', strlen($String)));
 
-  return obfuscatedString;
+  $Obfuscated_String_With_Key = '';
+  $Obfuscated_String_With_Key .= substr($Obfuscated_String, 0, 6);
+  $Obfuscated_String_With_Key .= $String_Length[1];
+  $Obfuscated_String_With_Key .= substr($Obfuscated_String, 6, (strlen($Obfuscated_String) - 12));
+  $Obfuscated_String_With_Key .= $String_Length[0];
+  $Obfuscated_String_With_Key .= substr($Obfuscated_String, (strlen($Obfuscated_String) - 6));
+
+  return $Obfuscated_String_With_Key;
 }
 ```
 
