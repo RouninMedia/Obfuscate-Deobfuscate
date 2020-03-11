@@ -5,7 +5,10 @@ A simple obfuscation which works both server-side in PHP and client-side in Java
 
 This obfuscation repeatedly applies **Base64 Encoding** (which can be encoded and decoded by both PHP and Javascript) and **string reversal** to a given string.
 
-The obfuscation works both server-side and client-side, which means that a string can be obfuscated on the server initially and deobfuscated in the browser, later. 
+The obfuscation works both server-side and client-side, which means (just one example) that a string can be:
+
+ - **obfuscated** on the server initially; and
+ - **deobfuscated** in the browser, later. 
 
 ## PHP Obfuscate
 ```
