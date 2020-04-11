@@ -1,6 +1,8 @@
 # Obfuscate-Deobfuscate
 A simple obfuscation which works both server-side in PHP and client-side in Javascript
 
+**N.B.** *Obfuscation* is a very specific process. It is not *Encryption* and is not suitable as a stand-in for the latter.
+
 **Obfuscation** is a technique which makes a given piece of data *more difficult* for humans to read, understand and process and, at the same time, ensures that the data is *no more difficult* for computers to read, understand and process.
 
 This obfuscation repeatedly applies **Base64 Encoding** (which can be encoded and decoded by both PHP and Javascript) and **string reversal** to a given string.
