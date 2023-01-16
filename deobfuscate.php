@@ -1,9 +1,9 @@
 function deobfuscate($Obfuscated_String) {
 
-  $Block_Length = intval(substr($Obfuscated_String, (strlen($Obfuscated_String) - 7), 1).substr($Obfuscated_String, 6, 1));
+  $Block_Count = intval(substr($Obfuscated_String, (strlen($Obfuscated_String) - 7), 1).substr($Obfuscated_String, 6, 1));
   $Obfuscated_String = substr($Obfuscated_String, 0, 6).substr($Obfuscated_String, 7, (strlen($Obfuscated_String) - 14)).substr($Obfuscated_String, (strlen($Obfuscated_String) - 6));
 
-  $Obfuscated_String = preg_replace('/(.{'.(strlen($Obfuscated_String) / $Block_Length).'})/', '$1|', $Obfuscated_String);
+  $Obfuscated_String = preg_replace('/(.{'.(strlen($Obfuscated_String) / $Block_Count).'})/', '$1|', $Obfuscated_String);
   $Obfuscated_Array = explode('|', $Obfuscated_String);
   array_pop($Obfuscated_Array);
 
