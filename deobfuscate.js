@@ -14,7 +14,7 @@ function deobfuscate(obfuscatedString)  {
 
       obfuscatedArray[i] = obfuscatedArray[i].split('').reverse().join('');
       obfuscatedArray[i] = window.atob(obfuscatedArray[i]);
-      obfuscatedArray[i] = obfuscatedArray[i].replace('=', '');
+      obfuscatedArray[i] = obfuscatedArray[i].replace(/\=/g, '');
     }
   }
 
