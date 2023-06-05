@@ -7,7 +7,7 @@ function obfuscate(string, recursionNumber) {
     for (let j = 0; j < obfuscatedArray.length; j++) {
 
       obfuscatedArray[j] = window.btoa(obfuscatedArray[j]);
-      obfuscatedArray[j] = obfuscatedArray[j].replace('=', '');
+      obfuscatedArray[j] = obfuscatedArray[j].replace(/\=/g, '');
       obfuscatedArray[j] = obfuscatedArray[j].split('').reverse().join('');
     }
   }
