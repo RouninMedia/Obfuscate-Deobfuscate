@@ -80,7 +80,7 @@ function obfuscate(string, recursionNumber) {
     for (let j = 0; j < obfuscatedArray.length; j++) {
 
       obfuscatedArray[j] = window.btoa(obfuscatedArray[j]);
-      obfuscatedArray[j] = obfuscatedArray[j].replaceAll(/\=/g, '');
+      obfuscatedArray[j] = obfuscatedArray[j].replace(/\=/g, '');
       obfuscatedArray[j] = obfuscatedArray[j].split('').reverse().join('');
     }
   }
@@ -118,7 +118,7 @@ function deobfuscate(obfuscatedString)  {
 
       obfuscatedArray[i] = obfuscatedArray[i].split('').reverse().join('');
       obfuscatedArray[i] = window.atob(obfuscatedArray[i]);
-      obfuscatedArray[i] = obfuscatedArray[i].replaceAll(/\=/g, '');
+      obfuscatedArray[i] = obfuscatedArray[i].replace(/\=/g, '');
     }
   }
 
