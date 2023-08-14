@@ -150,7 +150,7 @@ function obfuscate(string, recursionNumber) {
 
 ## Javascript Deobfuscate
 ```
-function deobfuscate2(obfuscatedString)  {
+function deobfuscate(obfuscatedString)  {
 
   let stringSegments = [];
   let obfuscatedStringSegments = obfuscatedString.split('_');
@@ -183,6 +183,4 @@ function deobfuscate2(obfuscatedString)  {
   
   return stringSegments.join('');
 }
-
-
 ```
