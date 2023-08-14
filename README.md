@@ -58,21 +58,21 @@ function obfuscate($String, $Recursion_Number) {
 ```
 function deobfuscate($Obfuscated_String) {
 
-  $Separated_String = [];
-  $Separated_Obfuscated_String = explode('_', $Obfuscated_String);
+  $String_Segments = [];
+  $Obfuscated_String_Segments = explode('_', $Obfuscated_String);
   
-  for ($s = 0; $s < count($Separated_Obfuscated_String); $s++) {
+  for ($s = 0; $s < count($Obfuscated_String_Segments); $s++) {
   	
-    $Obfuscated_String = $Separated_Obfuscated_String[$s];
+    $Obfuscated_String_Segment = $Obfuscated_String_Segments[$s];
 
-    $Block_Length = intval(substr($Obfuscated_String, (strlen($Obfuscated_String) - 7), 1).substr($Obfuscated_String, 6, 1));
+    $Block_Length = intval(substr($Obfuscated_String_Segment, (strlen($Obfuscated_String_Segment) - 7), 1).substr($Obfuscated_String_Segment, 6, 1));
 
     if ($Block_Length === 0) {return FALSE;}
 
-    $Obfuscated_String = substr($Obfuscated_String, 0, 6).substr($Obfuscated_String, 7, (strlen($Obfuscated_String) - 14)).substr($Obfuscated_String, (strlen($Obfuscated_String) - 6));
-    $Obfuscated_String = preg_replace('/(.{'.(strlen($Obfuscated_String) / $Block_Length).'})/', '$1|', $Obfuscated_String);
+    $Obfuscated_String_Segment = substr($Obfuscated_String_Segment, 0, 6).substr($Obfuscated_String_Segment, 7, (strlen($Obfuscated_String_Segment) - 14)).substr($Obfuscated_String_Segment, (strlen($Obfuscated_String_Segment) - 6));
+    $Obfuscated_String_Segment = preg_replace('/(.{'.(strlen($Obfuscated_String_Segment) / $Block_Length).'})/', '$1|', $Obfuscated_String_Segment);
     
-    $Obfuscated_Array = explode('|', $Obfuscated_String);
+    $Obfuscated_Array = explode('|', $Obfuscated_String_Segment);
     array_pop($Obfuscated_Array);
 
     while (count(str_split($Obfuscated_Array[0])) > 1) {
@@ -84,14 +84,14 @@ function deobfuscate($Obfuscated_String) {
       }
     }
 
-    $String = implode('', $Obfuscated_Array);
+    $String_Segment = implode('', $Obfuscated_Array);
 
-    $String = str_replace(' [(...)]', '', $String);
+    $String_Segment = str_replace(' [(...)]', '', $String_Segment);
     
-    $Separated_String[$s] = $String; 
+    $String_Segments[$s] = $String_Segment; 
   }
 
-  return implode('', $Separated_String);
+  return implode('', $String_Segments);
 }
 ```
 
