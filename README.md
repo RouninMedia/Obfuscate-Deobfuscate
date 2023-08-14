@@ -38,13 +38,13 @@ function obfuscate($String, $Recursion_Number) {
     }
 
     $Obfuscated_String_Segment = implode('', $Obfuscated_Array);
-    $String_Length = str_split(sprintf('%02d', strlen($String_Segment)));
+    $String_Segment_Length = str_split(sprintf('%02d', strlen($String_Segment)));
 
     $Obfuscated_String_Segment_With_Key = '';
     $Obfuscated_String_Segment_With_Key .= substr($Obfuscated_String_Segment, 0, 6);
-    $Obfuscated_String_Segment_With_Key .= $String_Length[1];
+    $Obfuscated_String_Segment_With_Key .= $String_Segment_Length[1];
     $Obfuscated_String_Segment_With_Key .= substr($Obfuscated_String_Segment, 6, (strlen($Obfuscated_String_Segment) - 12));
-    $Obfuscated_String_Segment_With_Key .= $String_Length[0];
+    $Obfuscated_String_Segment_With_Key .= $String_Segment_Length[0];
     $Obfuscated_String_Segment_With_Key .= substr($Obfuscated_String_Segment, (strlen($Obfuscated_String_Segment) - 6));
 
     $Obfuscated_String_Segments[$s] = $Obfuscated_String_Segment_With_Key;
