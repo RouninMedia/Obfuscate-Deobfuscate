@@ -55,26 +55,40 @@ function obfuscate($String, $Recursion_Number) {
 ```
 function deobfuscate($Obfuscated_String) {
 
-  $Block_Length = intval(substr($Obfuscated_String, (strlen($Obfuscated_String) - 7), 1).substr($Obfuscated_String, 6, 1));
-  $Obfuscated_String = substr($Obfuscated_String, 0, 6).substr($Obfuscated_String, 7, (strlen($Obfuscated_String) - 14)).substr($Obfuscated_String, (strlen($Obfuscated_String) - 6));
+  $Separated_String = [];
+  $Separated_Obfuscated_String = explode('_', $Obfuscated_String);
+  
+  for ($s = 0; $s < count($Separated_Obfuscated_String); $s++) {
+  	
+    $Obfuscated_String = $Separated_Obfuscated_String[$s];
 
-  $Obfuscated_String = preg_replace('/(.{'.(strlen($Obfuscated_String) / $Block_Length).'})/', '$1|', $Obfuscated_String);
-  $Obfuscated_Array = explode('|', $Obfuscated_String);
-  array_pop($Obfuscated_Array);
+    $Block_Length = intval(substr($Obfuscated_String, (strlen($Obfuscated_String) - 7), 1).substr($Obfuscated_String, 6, 1));
 
-  while (count(str_split($Obfuscated_Array[0])) > 1) {
+    if ($Block_Length === 0) {return FALSE;}
 
-    for ($i = 0; $i < count($Obfuscated_Array); $i++) {
+    $Obfuscated_String = substr($Obfuscated_String, 0, 6).substr($Obfuscated_String, 7, (strlen($Obfuscated_String) - 14)).substr($Obfuscated_String, (strlen($Obfuscated_String) - 6));
+    $Obfuscated_String = preg_replace('/(.{'.(strlen($Obfuscated_String) / $Block_Length).'})/', '$1|', $Obfuscated_String);
+    
+    $Obfuscated_Array = explode('|', $Obfuscated_String);
+    array_pop($Obfuscated_Array);
 
-      $Obfuscated_Array[$i] = strrev($Obfuscated_Array[$i]);
-      $Obfuscated_Array[$i] = base64_decode($Obfuscated_Array[$i]);
-      $Obfuscated_Array[$i] = str_replace('=', '', $Obfuscated_Array[$i]);
+    while (count(str_split($Obfuscated_Array[0])) > 1) {
+
+      for ($i = 0; $i < count($Obfuscated_Array); $i++) {
+
+        $Obfuscated_Array[$i] = strrev($Obfuscated_Array[$i]);
+        $Obfuscated_Array[$i] = base64_decode($Obfuscated_Array[$i]);
+      }
     }
+
+    $String = implode('', $Obfuscated_Array);
+
+    $String = str_replace(' [(...)]', '', $String);
+    
+    $Separated_String[$s] = $String; 
   }
 
-  $String = implode('', $Obfuscated_Array);
-
-  return $String;
+  return implode('', $Separated_String);
 }
 ```
 
