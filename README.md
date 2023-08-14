@@ -16,11 +16,11 @@ The obfuscation works _both server-side and client-side_, which means (just one 
 ```
 function obfuscate($String, $Recursion_Number) {
   
+  $Obfuscated_String_Segments = [];
   $String_Segments = (strlen($String) > 99) ? explode('#', preg_replace('/(.{99})/', '$1#', $String)) : $Array = [$String];
   
   for ($s = 0; $s < count($String_Segments); $s++) {
 
-    $Obfuscated_String_Segments = [];
     $String_Segment = $String_Segments[$s];
 
     if (strlen($String_Segment) < 4) {$String_Segment .= ' [(...)]';}
