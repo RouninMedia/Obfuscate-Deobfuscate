@@ -5,7 +5,7 @@ function obfuscate(string, recursionNumber) {
 
   if (string.length > 99) {
 
-    let regex = new RegExp('(.{99})', 'g');
+    const regex = new RegExp('(.{99})', 'g');
     stringSegments = string.replace(regex, '$1#').split('#');
   }
 
