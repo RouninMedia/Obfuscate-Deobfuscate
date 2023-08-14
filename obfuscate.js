@@ -33,13 +33,13 @@ function obfuscate(string, recursionNumber) {
     }
 
     let obfuscatedStringSegment = obfuscatedArray.join('');
-    let stringLength = string.length.toString().padStart(2, '0').split('');
+    let stringSegmentLength = stringSegment.length.toString().padStart(2, '0').split('');
 
     let obfuscatedStringSegmentWithKey = '';
     obfuscatedStringSegmentWithKey += obfuscatedStringSegment.substr(0, 6);
-    obfuscatedStringSegmentWithKey += stringLength[1];
+    obfuscatedStringSegmentWithKey += stringSegmentLength[1];
     obfuscatedStringSegmentWithKey += obfuscatedStringSegment.substr(6, (obfuscatedStringSegment.length - 12));
-    obfuscatedStringSegmentWithKey += stringLength[0];
+    obfuscatedStringSegmentWithKey += stringSegmentLength[0];
     obfuscatedStringSegmentWithKey += obfuscatedStringSegment.substr(obfuscatedStringSegment.length - 6);
 
     obfuscatedStringSegments[s] = obfuscatedStringSegmentWithKey;
