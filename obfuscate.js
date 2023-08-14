@@ -1,27 +1,49 @@
 function obfuscate(string, recursionNumber) {
 
-  let obfuscatedArray = string.split('');
-  
-  for (let i = 0; i < recursionNumber; i++) {
+  let stringSegments;
+  let obfuscatedStringSegments = [];
 
-    for (let j = 0; j < obfuscatedArray.length; j++) {
+  if (string.length > 99) {
 
-      obfuscatedArray[j] = window.btoa(obfuscatedArray[j]);
-      obfuscatedArray[j] = obfuscatedArray[j].replace(/\=/g, '');
-      obfuscatedArray[j] = obfuscatedArray[j].split('').reverse().join('');
-    }
+    let regex = new RegExp('(.{99})', 'g');
+    stringSegments = string.replace(regex, '$1#').split('#');
   }
 
-  let obfuscatedString = obfuscatedArray.join('');
+  else {
 
-  let stringLength = string.length.toString().padStart(2, '0').split('');
+    stringSegments = [string];
+  }
 
-  let obfuscatedStringWithKey = '';
-  obfuscatedStringWithKey += obfuscatedString.substr(0, 6);
-  obfuscatedStringWithKey += stringLength[1];
-  obfuscatedStringWithKey += obfuscatedString.substr(6, (obfuscatedString.length - 12));
-  obfuscatedStringWithKey += stringLength[0];
-  obfuscatedStringWithKey += obfuscatedString.substr(obfuscatedString.length - 6);
+  for (let s = 0; s < stringSegments.length; s++) {
 
-  return obfuscatedStringWithKey;
+    let stringSegment = stringSegments[s];
+
+    if (stringSegment.length < 4) {stringSegment += ' [(...)]';}
+
+    let obfuscatedArray = stringSegment.split('');
+  
+    for (let i = 0; i < recursionNumber; i++) {
+
+      for (let j = 0; j < obfuscatedArray.length; j++) {
+
+        obfuscatedArray[j] = window.btoa(obfuscatedArray[j]);
+        obfuscatedArray[j] = obfuscatedArray[j].replace(/\=/g, '');
+        obfuscatedArray[j] = obfuscatedArray[j].split('').reverse().join('');
+      }
+    }
+
+    let obfuscatedStringSegment = obfuscatedArray.join('');
+    let stringLength = string.length.toString().padStart(2, '0').split('');
+
+    let obfuscatedStringSegmentWithKey = '';
+    obfuscatedStringSegmentWithKey += obfuscatedStringSegment.substr(0, 6);
+    obfuscatedStringSegmentWithKey += stringLength[1];
+    obfuscatedStringSegmentWithKey += obfuscatedStringSegment.substr(6, (obfuscatedStringSegment.length - 12));
+    obfuscatedStringSegmentWithKey += stringLength[0];
+    obfuscatedStringSegmentWithKey += obfuscatedStringSegment.substr(obfuscatedStringSegment.length - 6);
+
+    obfuscatedStringSegments[s] = obfuscatedStringSegmentWithKey;
+  }
+
+  return obfuscatedStringSegments.join('_');
 }
