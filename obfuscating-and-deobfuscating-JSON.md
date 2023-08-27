@@ -1,70 +1,76 @@
-#
+# Obfuscating and Deobfuscating JSON
 
 ```php
 
 <?php
 
-$DataPodJSON = '{"Example":{"JSON":"File"}}';
+  //*****************//
+ // OBFUSCATE ARRAY //
+//*****************//
 
-
-function obfuscateDataPod ($DataPodArray) {
+function obfuscateArray ($myArray) {
 	
-  $Keys = array_Keys($DataPodArray);
+  $Keys = array_Keys($myArray);
  
   foreach($Keys as $Key) {
   	
-  	if (is_array($DataPodArray[$Key])) {
+  	if (is_array($myArray[$Key])) {
   	  
-  	  $DataPodArray[obfuscate($Key, 3)] = obfuscateDataPod($DataPodArray[$Key]);
+  	  $myArray[obfuscate($Key, 3)] = obfuscateArray($myArray[$Key]);
   	  
-      unset($DataPodArray[$Key]);
+      unset($myArray[$Key]);
   	}
   	
-  	else if (is_string($DataPodArray[$Key])) {
+  	else if (is_string($myArray[$Key])) {
  	
-      $DataPodArray[obfuscate($Key, 3)] = obfuscate($DataPodArray[$Key], 4);
+      $myArray[obfuscate($Key, 3)] = obfuscate($myArray[$Key], 4);
       
-      unset($DataPodArray[$Key]);
+      unset($myArray[$Key]);
   	}
   }
 
-  return $DataPodArray;	
+  return $myArray;	
 }
 
 
-function deobfuscateDataPod ($ObfuscatedDataPodArray) {
+  //*******************//
+ // DEOBFUSCATE ARRAY //
+//*******************//
+
+function deobfuscateArray ($ObfuscatedArray) {
 	
-  $Keys = array_Keys($ObfuscatedDataPodArray);
+  $Keys = array_Keys($ObfuscatedArray);
  
   foreach($Keys as $Key) {
   	
-  	if (is_array($ObfuscatedDataPodArray[$Key])) {
+  	if (is_array($ObfuscatedArray[$Key])) {
   	  
-  	  $ObfuscatedDataPodArray[deobfuscate($Key)] = deobfuscateDataPod($ObfuscatedDataPodArray[$Key]);
+  	  $ObfuscatedArray[deobfuscate($Key)] = deobfuscateArray($ObfuscatedArray[$Key]);
   	  
-      unset($ObfuscatedDataPodArray[$Key]);
+      unset($ObfuscatedArray[$Key]);
   	}
   	
-  	else if (is_string($ObfuscatedDataPodArray[$Key])) {
+  	else if (is_string($ObfuscatedArray[$Key])) {
  	
-      $ObfuscatedDataPodArray[deobfuscate($Key)] = deobfuscate($ObfuscatedDataPodArray[$Key]);
+      $ObfuscatedArray[deobfuscate($Key)] = deobfuscate($ObfuscatedArray[$Key]);
       
-      unset($ObfuscatedDataPodArray[$Key]);
+      unset($ObfuscatedArray[$Key]);
   	}
   }
 
-  return $ObfuscatedDataPodArray;	
+  return $ObfuscatedArray;	
 }
 
 
+$myJSON = '{"Example":{"JSON":"File"}}';
+$myArray = json_decode($myJSON, TRUE);
 
-$DataPodArray = json_decode($DataPodJSON, TRUE);
+$ObfuscatedArray = obfuscateArray($myArray);
+$DeobfuscatedArray = deobfuscateArray($ObfuscatedArray);
 
-$ObfuscatedDataPodArray = obfuscateDataPod($DataPodArray);
-$DeobfuscatedDataPodArray = deobfuscateDataPod($ObfuscatedDataPodArray);
-
-echo json_encode($ObfuscatedDataPodArray)."\n\n";
-echo json_encode($DeobfuscatedDataPodArray)."\n\n";
+echo $myJSON."\n\n";
+echo json_encode($ObfuscatedArray)."\n\n";
+echo json_encode($DeobfuscatedArray)."\n\n";
 
 ?>
 ```
