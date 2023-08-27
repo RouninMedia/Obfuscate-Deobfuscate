@@ -68,9 +68,9 @@ $myArray = json_decode($myJSON, TRUE);
 $ObfuscatedArray = obfuscateArray($myArray);
 $DeobfuscatedArray = deobfuscateArray($ObfuscatedArray);
 
-echo $myJSON."\n\n";
-echo json_encode($ObfuscatedArray)."\n\n";
-echo json_encode($DeobfuscatedArray)."\n\n";
+echo $myJSON.' // {"Example":{"JSON":"File"}}'."\n\n";
+echo json_encode($ObfuscatedArray).' // {"VZVSRd7VVVZ1aVdVSRdVTRd0VSVZ1b":{"aFTTkF4TVkF0TUaFTU":"wUUZUY4gUWRmVwUWRmU0gYxolV"}}'."\n\n";
+echo json_encode($DeobfuscatedArray).' // {"Example":{"JSON":"File"}}'."\n\n";
 
 ?>
 ```
